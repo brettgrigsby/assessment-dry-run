@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   end
 
   def check_user
-    redirect_to new_user_path unless session[:user_id]
+    redirect_to new_user_path unless current_user
   end
 
   private
