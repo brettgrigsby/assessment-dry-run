@@ -11,6 +11,13 @@ class LinksController < ApplicationController
     redirect_to current_user
   end
 
+  def update
+    link = Link.find(params[:id])
+    link.toggle_read
+
+    render :json => {link: link.url}
+  end
+
   private
 
   def link_params

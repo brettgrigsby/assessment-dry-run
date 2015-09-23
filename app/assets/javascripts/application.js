@@ -14,3 +14,53 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+$(document).on("click", ".read-btn", toggleLink)
+
+function toggleLink() {
+  var $link = $(this).parent();
+  var linkId = $(this).parent().attr("data-id");
+
+  $.ajax({
+    url: "/links/" + linkId,
+    type: "PUT",
+    success: function(result) {
+      var otherList = $link.parent().siblings().first();
+      var url = $link.children('a').first().text()
+
+      otherList.append(createLink(url, linkId));
+      var newButton = otherList.last().children('button').first();
+      newButton.on("click", toggleLink);
+      $link.remove();
+    }
+  });
+};
+
+function addNewLink(url) {
+  $.ajax({
+    url: "/links",
+    type: "POST",
+    data: { link: { url: url } },
+    success: function(result) {
+      var list = $("#unread-links");
+      console.log(result);
+      list.append(createLink(url, 50));
+      var newButton = list.last().children('button').first();
+      newButton.on("click", toggleLink);
+    }
+  });
+}
+
+function createLink(url, id, buttonText) {
+  return '<li data-id="' + id + '"><a href="' + url + '">' + url + '</a><button class="read-btn">toggle read</button></li>'
+}
+
+$(document).ready(function () {
+  $("#new-link-submit").on("click", function(event) {
+    var newUrl = $("#url-field").val();
+    event.preventDefault();
+    addNewLink(newUrl);
+  });
+})
+
