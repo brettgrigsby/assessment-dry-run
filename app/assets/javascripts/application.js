@@ -42,9 +42,9 @@ function addNewLink(url) {
     url: "/links",
     type: "POST",
     data: { link: { url: url } },
-    success: function(result) {
+    success: function(link) {
       var list = $("#unread-links");
-      console.log(result);
+      console.log(link);
       list.append(createLink(url, 50));
       var newButton = list.last().children('button').first();
       newButton.on("click", toggleLink);
@@ -57,10 +57,6 @@ function createLink(url, id, buttonText) {
 }
 
 $(document).ready(function () {
-  $("#new-link-submit").on("click", function(event) {
-    var newUrl = $("#url-field").val();
-    event.preventDefault();
-    addNewLink(newUrl);
-  });
+
 })
 
