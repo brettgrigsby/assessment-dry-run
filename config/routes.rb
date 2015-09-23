@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create]
   resources :links, only: [:create]
 
+  get 'logout/' => 'sessions#destroy'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
