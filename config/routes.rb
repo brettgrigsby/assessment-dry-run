@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :show]
   resources :sessions, only: [:create]
+  resources :links, only: [:create]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

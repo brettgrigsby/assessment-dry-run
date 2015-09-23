@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    @link = Link.new
   end
 
   def check_user

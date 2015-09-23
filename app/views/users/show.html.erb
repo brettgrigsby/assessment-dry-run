@@ -1,3 +1,18 @@
 <h1>Welcome, <%= current_user.email %></h1>
 
+<h2>Add a link:</h2>
+
+<%= form_for(@link, url: {controller: "links", action: "create"}) do |f| %>
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+
+  <%= f.submit %>
+<% end %>
+
 <h2>Here are your links:</h2>
+
+<ul>
+  <% current_user.links.each do |link| %>
+    <li><%= link_to link.url, link.url %></li>
+  <% end %>
+</ul>
