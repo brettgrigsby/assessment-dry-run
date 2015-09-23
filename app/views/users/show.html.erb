@@ -13,6 +13,6 @@
 
 <ul>
   <% current_user.links.each do |link| %>
-    <li><%= link_to link.url, link.url %></li>
+    <li><%= link_to link.url, link.url %> read: <%= link.read %></li>
   <% end %>
 </ul>
